@@ -9,7 +9,7 @@ now you are good to go!!
 
 ## Remappings 
 ','   '.'   'capslock'
-- all the keys except these will work as usual(even '<'(shift + ,) and '>'(shift + .))
+- all the keys except these three will work as usual(even '<'(shift + ,) and '>'(shift + .))
 - these three keys are converted to trigger keys and they remap certain keys when they are held down
 - for capslock >> press capslock twice whithin 0.2 seconds
 
@@ -49,7 +49,14 @@ now you are good to go!!
 - v -> ]
 - b -> |
 
+### '.' key
+- k -> Enter
+- j -> Backspace
+- i -> shift + enter
+- m -> ctrl + bakcspace
+- n -> delete
+
 ### '.' + ',' (NUM PAD -> experimantal)
-w -> 7    e -> 8    r -> 9
-s -> 4    d -> 5    f -> 6     g -> 0
-x -> 1    c -> 2    v -> 3
++ w -> 7    e -> 8    r -> 9
++ s -> 4    d -> 5    f -> 6     g -> 0
++ x -> 1    c -> 2    v -> 3
