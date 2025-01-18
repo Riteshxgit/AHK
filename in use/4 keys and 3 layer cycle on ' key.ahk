@@ -139,10 +139,9 @@ class Highlight {
 
 
 
-
 ;------------------------------------------------------------------------------;
 
-;--------------------------------  .   ---------------------------------------------
+;--------------------------------  .   dot---------------------------------------------
 
 #NoEnv
 SendMode Input
@@ -150,7 +149,7 @@ SetWorkingDir %A_ScriptDir%
 
 ; Function to handle tap or hold for the . key using scan code SC034
 SC034::
-    KeyWait, SC034, T0.01
+    KeyWait, SC034, T0.000
     if (ErrorLevel) ; If held down
     {
         ; Enable remapping
@@ -160,11 +159,15 @@ SC034::
         Hotkey, *f, SendRightArrow, On
         Hotkey, *r, Send_apos, On
         Hotkey, *t, SendFwrdSlash, On
+        Hotkey, *r, SendCtrlRight, On
+        Hotkey, *w, SendCtrlleft, On
 
         Hotkey, *k, SendEnter, On
         Hotkey, *j, SendBackspace, On
         Hotkey, *m, SendCtrlBackspace, On
         Hotkey, *n, Senddel, On
+        Hotkey, *i, SendShiftEnter, On
+        
 
 
         ; Wait for the SC034 (.) key to be released
@@ -176,11 +179,15 @@ SC034::
         Hotkey, *f, SendRightArrow, Off
         Hotkey, *r, Send_apos, Off
         Hotkey, *t, SendFwrdSlash, Off
+        Hotkey, *r, SendCtrlRight, Off
+        Hotkey, *w, SendCtrlleft, Off
 
         Hotkey, *k, SendEnter, Off
         Hotkey, *j, SendBackspace, Off
         Hotkey, *m, SendCtrlBackspace, Off
         Hotkey, *n, Senddel, Off
+        Hotkey, *i, SendShiftEnter, Off
+        
 
     }
     else
@@ -215,6 +222,20 @@ SendRightArrow:
     if (GetKeyState("SC034", "P"))
     {
         Send, {Right}
+    }
+Return
+
+SendCtrlleft:
+    if (GetKeyState("SC034", "P"))
+    {
+        Send, ^{Left}
+    }
+Return
+
+SendCtrlRight:
+    if (GetKeyState("SC034", "P"))
+    {
+        Send, ^{Right}
     }
 Return
 
@@ -260,6 +281,13 @@ Senddel:
     }
 Return
 
+SendShiftEnter:
+    if (GetKeyState("SC034", "P"))
+    {
+        Send, +{Enter}
+    }
+Return
+
 
 
 
@@ -272,7 +300,7 @@ SetWorkingDir %A_ScriptDir%
 
 ; Function to handle tap or hold for the , key using scan code SC033
 SC033::
-    KeyWait, SC033, T0.01
+    KeyWait, SC033, T0.000
     if (ErrorLevel) ; If held down
     {
         ; Enable remapping
@@ -427,354 +455,354 @@ Return
 ;--------------------------------------------------------------------------------
 ;---------------------------------- '  ------------------------------------------
 
-#NoEnv
-SendMode Input
-SetWorkingDir %A_ScriptDir%
+; #NoEnv
+; SendMode Input
+; SetWorkingDir %A_ScriptDir%
 
 
 
-; Define a global variable to track the current layer state
-; 0 = Normal Layer, 1 = Number Layer, 2 = Mouse Control Layer
-layer_state := 0
-Modulo(t){
-    if(t == 0) 
-        return 1
-    else if(t == 1)
-        return 2 
-    else 
-        return 0
-}
-; Redefine the ' key to toggle between layers
-$':: 
-    layer_state := Modulo(layer_state) ; Cycle through 0, 1, 2
+; ; Define a global variable to track the current layer state
+; ; 0 = Normal Layer, 1 = Number Layer, 2 = Mouse Control Layer
+; layer_state := 0
+; Modulo(t){
+;     if(t == 0) 
+;         return 1
+;     else if(t == 1)
+;         return 2 
+;     else 
+;         return 0
+; }
+; ; Redefine the ' key to toggle between layers
+; $':: 
+;     layer_state := Modulo(layer_state) ; Cycle through 0, 1, 2
 
-    ; Deactivate all layers first
-    Hotkey, *q, SendCtrlQ, Off
-    Hotkey, *w, SendCtrlW, Off
-    Hotkey, *e, SendCtrlE, Off
-    Hotkey, *r, SendCtrlR, Off
-    Hotkey, *t, SendCtrlT, Off
-    Hotkey, *y, SendCtrlY, Off
-    Hotkey, *u, SendCtrlU, Off
-    Hotkey, *i, SendCtrlI, Off
-    Hotkey, *o, SendCtrlO, Off
-    Hotkey, *p, SendCtrlP, Off 
-    Hotkey, *a, SendCtrlA, Off
-    Hotkey, *s, SendCtrlS, Off
-    Hotkey, *d, SendCtrlD, Off 
-    Hotkey, *f, SendCtrlF, Off 
-    Hotkey, *g, SendCtrlG, Off 
-    Hotkey, *h, SendCtrlH, Off 
-    Hotkey, *j, SendCtrlJ, Off 
-    Hotkey, *k, SendCtrlK, Off 
-    Hotkey, *l, SendCtrlL, Off 
-    Hotkey, *z, SendCtrlZ, Off
-    Hotkey, *x, SendCtrlX, Off 
-    Hotkey, *c, SendCtrlC, Off 
-    Hotkey, *v, SendCtrlV, Off 
-    Hotkey, *b, SendCtrlB, Off 
-    Hotkey, *n, SendCtrlN, Off 
-    Hotkey, *m, SendCtrlM, Off
-    Hotkey, *q, SendCtrlShiftQ, Off
-    Hotkey, *w, SendCtrlShiftW, Off
-    Hotkey, *e, SendCtrlShiftE, Off
-    Hotkey, *r, SendCtrlShiftR, Off
-    Hotkey, *t, SendCtrlShiftT, Off
-    Hotkey, *y, SendCtrlShiftY, Off
-    Hotkey, *u, SendCtrlShiftU, Off
-    Hotkey, *i, SendCtrlShiftI, Off
-    Hotkey, *o, SendCtrlShiftO, Off
-    Hotkey, *p, SendCtrlShiftP, Off 
-    Hotkey, *a, SendCtrlShiftA, Off
-    Hotkey, *s, SendCtrlShiftS, Off
-    Hotkey, *d, SendCtrlShiftD, Off 
-    Hotkey, *f, SendCtrlShiftF, Off 
-    Hotkey, *g, SendCtrlShiftG, Off 
-    Hotkey, *h, SendCtrlShiftH, Off 
-    Hotkey, *j, SendCtrlShiftJ, Off 
-    Hotkey, *k, SendCtrlShiftK, Off 
-    Hotkey, *l, SendCtrlShiftL, Off 
-    Hotkey, *z, SendCtrlShiftZ, Off
-    Hotkey, *x, SendCtrlShiftX, Off 
-    Hotkey, *c, SendCtrlShiftC, Off 
-    Hotkey, *v, SendCtrlShiftV, Off 
-    Hotkey, *b, SendCtrlShiftB, Off 
-    Hotkey, *n, SendCtrlShiftN, Off 
-    Hotkey, *m, SendCtrlShiftM, Off
+;     ; Deactivate all layers first
+;     Hotkey, *q, SendCtrlQ, Off
+;     Hotkey, *w, SendCtrlW, Off
+;     Hotkey, *e, SendCtrlE, Off
+;     Hotkey, *r, SendCtrlR, Off
+;     Hotkey, *t, SendCtrlT, Off
+;     Hotkey, *y, SendCtrlY, Off
+;     Hotkey, *u, SendCtrlU, Off
+;     Hotkey, *i, SendCtrlI, Off
+;     Hotkey, *o, SendCtrlO, Off
+;     Hotkey, *p, SendCtrlP, Off 
+;     Hotkey, *a, SendCtrlA, Off
+;     Hotkey, *s, SendCtrlS, Off
+;     Hotkey, *d, SendCtrlD, Off 
+;     Hotkey, *f, SendCtrlF, Off 
+;     Hotkey, *g, SendCtrlG, Off 
+;     Hotkey, *h, SendCtrlH, Off 
+;     Hotkey, *j, SendCtrlJ, Off 
+;     Hotkey, *k, SendCtrlK, Off 
+;     Hotkey, *l, SendCtrlL, Off 
+;     Hotkey, *z, SendCtrlZ, Off
+;     Hotkey, *x, SendCtrlX, Off 
+;     Hotkey, *c, SendCtrlC, Off 
+;     Hotkey, *v, SendCtrlV, Off 
+;     Hotkey, *b, SendCtrlB, Off 
+;     Hotkey, *n, SendCtrlN, Off 
+;     Hotkey, *m, SendCtrlM, Off
+;     Hotkey, *q, SendCtrlShiftQ, Off
+;     Hotkey, *w, SendCtrlShiftW, Off
+;     Hotkey, *e, SendCtrlShiftE, Off
+;     Hotkey, *r, SendCtrlShiftR, Off
+;     Hotkey, *t, SendCtrlShiftT, Off
+;     Hotkey, *y, SendCtrlShiftY, Off
+;     Hotkey, *u, SendCtrlShiftU, Off
+;     Hotkey, *i, SendCtrlShiftI, Off
+;     Hotkey, *o, SendCtrlShiftO, Off
+;     Hotkey, *p, SendCtrlShiftP, Off 
+;     Hotkey, *a, SendCtrlShiftA, Off
+;     Hotkey, *s, SendCtrlShiftS, Off
+;     Hotkey, *d, SendCtrlShiftD, Off 
+;     Hotkey, *f, SendCtrlShiftF, Off 
+;     Hotkey, *g, SendCtrlShiftG, Off 
+;     Hotkey, *h, SendCtrlShiftH, Off 
+;     Hotkey, *j, SendCtrlShiftJ, Off 
+;     Hotkey, *k, SendCtrlShiftK, Off 
+;     Hotkey, *l, SendCtrlShiftL, Off 
+;     Hotkey, *z, SendCtrlShiftZ, Off
+;     Hotkey, *x, SendCtrlShiftX, Off 
+;     Hotkey, *c, SendCtrlShiftC, Off 
+;     Hotkey, *v, SendCtrlShiftV, Off 
+;     Hotkey, *b, SendCtrlShiftB, Off 
+;     Hotkey, *n, SendCtrlShiftN, Off 
+;     Hotkey, *m, SendCtrlShiftM, Off
 
-    if (layer_state = 1) {
-        ; Activate ctrl layer
-        Hotkey, *q, SendCtrlQ, On
-        Hotkey, *w, SendCtrlW, On
-        Hotkey, *e, SendCtrlE, On
-        Hotkey, *r, SendCtrlR, On
-        Hotkey, *t, SendCtrlT, On
-        Hotkey, *y, SendCtrlY, On
-        Hotkey, *u, SendCtrlU, On
-        Hotkey, *i, SendCtrlI, On
-        Hotkey, *o, SendCtrlO, On
-        Hotkey, *p, SendCtrlP, On 
-        Hotkey, *a, SendCtrlA, On
-        Hotkey, *s, SendCtrlS, On
-        Hotkey, *d, SendCtrlD, On 
-        Hotkey, *f, SendCtrlF, On 
-        Hotkey, *g, SendCtrlG, On 
-        Hotkey, *h, SendCtrlH, On 
-        Hotkey, *j, SendCtrlJ, On 
-        Hotkey, *k, SendCtrlK, On 
-        Hotkey, *l, SendCtrlL, On 
-        Hotkey, *z, SendCtrlZ, On
-        Hotkey, *x, SendCtrlX, On 
-        Hotkey, *c, SendCtrlC, On 
-        Hotkey, *v, SendCtrlV, On 
-        Hotkey, *b, SendCtrlB, On 
-        Hotkey, *n, SendCtrlN, On 
-        Hotkey, *m, SendCtrlM, On
+;     if (layer_state = 1) {
+;         ; Activate ctrl layer
+;         Hotkey, *q, SendCtrlQ, On
+;         Hotkey, *w, SendCtrlW, On
+;         Hotkey, *e, SendCtrlE, On
+;         Hotkey, *r, SendCtrlR, On
+;         Hotkey, *t, SendCtrlT, On
+;         Hotkey, *y, SendCtrlY, On
+;         Hotkey, *u, SendCtrlU, On
+;         Hotkey, *i, SendCtrlI, On
+;         Hotkey, *o, SendCtrlO, On
+;         Hotkey, *p, SendCtrlP, On 
+;         Hotkey, *a, SendCtrlA, On
+;         Hotkey, *s, SendCtrlS, On
+;         Hotkey, *d, SendCtrlD, On 
+;         Hotkey, *f, SendCtrlF, On 
+;         Hotkey, *g, SendCtrlG, On 
+;         Hotkey, *h, SendCtrlH, On 
+;         Hotkey, *j, SendCtrlJ, On 
+;         Hotkey, *k, SendCtrlK, On 
+;         Hotkey, *l, SendCtrlL, On 
+;         Hotkey, *z, SendCtrlZ, On
+;         Hotkey, *x, SendCtrlX, On 
+;         Hotkey, *c, SendCtrlC, On 
+;         Hotkey, *v, SendCtrlV, On 
+;         Hotkey, *b, SendCtrlB, On 
+;         Hotkey, *n, SendCtrlN, On 
+;         Hotkey, *m, SendCtrlM, On
 
-    } else if (layer_state = 2) {
-        ; Activate ctrl+shift layer
-        Hotkey, *q, SendCtrlShiftQ, On
-        Hotkey, *w, SendCtrlShiftW, On
-        Hotkey, *e, SendCtrlShiftE, On
-        Hotkey, *r, SendCtrlShiftR, On
-        Hotkey, *t, SendCtrlShiftT, On
-        Hotkey, *y, SendCtrlShiftY, On
-        Hotkey, *u, SendCtrlShiftU, On
-        Hotkey, *i, SendCtrlShiftI, On
-        Hotkey, *o, SendCtrlShiftO, On
-        Hotkey, *p, SendCtrlShiftP, On 
-        Hotkey, *a, SendCtrlShiftA, On
-        Hotkey, *s, SendCtrlShiftS, On
-        Hotkey, *d, SendCtrlShiftD, On 
-        Hotkey, *f, SendCtrlShiftF, On 
-        Hotkey, *g, SendCtrlShiftG, On 
-        Hotkey, *h, SendCtrlShiftH, On 
-        Hotkey, *j, SendCtrlShiftJ, On 
-        Hotkey, *k, SendCtrlShiftK, On 
-        Hotkey, *l, SendCtrlShiftL, On 
-        Hotkey, *z, SendCtrlShiftZ, On
-        Hotkey, *x, SendCtrlShiftX, On 
-        Hotkey, *c, SendCtrlShiftC, On 
-        Hotkey, *v, SendCtrlShiftV, On 
-        Hotkey, *b, SendCtrlShiftB, On 
-        Hotkey, *n, SendCtrlShiftN, On 
-        Hotkey, *m, SendCtrlShiftM, On
-    }
-Return
+;     } else if (layer_state = 2) {
+;         ; Activate ctrl+shift layer
+;         Hotkey, *q, SendCtrlShiftQ, On
+;         Hotkey, *w, SendCtrlShiftW, On
+;         Hotkey, *e, SendCtrlShiftE, On
+;         Hotkey, *r, SendCtrlShiftR, On
+;         Hotkey, *t, SendCtrlShiftT, On
+;         Hotkey, *y, SendCtrlShiftY, On
+;         Hotkey, *u, SendCtrlShiftU, On
+;         Hotkey, *i, SendCtrlShiftI, On
+;         Hotkey, *o, SendCtrlShiftO, On
+;         Hotkey, *p, SendCtrlShiftP, On 
+;         Hotkey, *a, SendCtrlShiftA, On
+;         Hotkey, *s, SendCtrlShiftS, On
+;         Hotkey, *d, SendCtrlShiftD, On 
+;         Hotkey, *f, SendCtrlShiftF, On 
+;         Hotkey, *g, SendCtrlShiftG, On 
+;         Hotkey, *h, SendCtrlShiftH, On 
+;         Hotkey, *j, SendCtrlShiftJ, On 
+;         Hotkey, *k, SendCtrlShiftK, On 
+;         Hotkey, *l, SendCtrlShiftL, On 
+;         Hotkey, *z, SendCtrlShiftZ, On
+;         Hotkey, *x, SendCtrlShiftX, On 
+;         Hotkey, *c, SendCtrlShiftC, On 
+;         Hotkey, *v, SendCtrlShiftV, On 
+;         Hotkey, *b, SendCtrlShiftB, On 
+;         Hotkey, *n, SendCtrlShiftN, On 
+;         Hotkey, *m, SendCtrlShiftM, On
+;     }
+; Return
 
-; Remap ctrl
-SendCtrlQ:
-Send, ^q
-Return
+; ; Remap ctrl
+; SendCtrlQ:
+; Send, ^q
+; Return
 
-SendCtrlW:
-Send, ^w
-Return
+; SendCtrlW:
+; Send, ^w
+; Return
 
-SendCtrlE:
-Send, ^e
-Return
+; SendCtrlE:
+; Send, ^e
+; Return
 
-SendCtrlR:
-Send, ^r
-Return
+; SendCtrlR:
+; Send, ^r
+; Return
 
-SendCtrlT:
-Send, ^t
-Return
+; SendCtrlT:
+; Send, ^t
+; Return
 
-SendCtrlY:
-Send, ^y
-Return
+; SendCtrlY:
+; Send, ^y
+; Return
 
-SendCtrlU:
-Send, ^u
-Return
+; SendCtrlU:
+; Send, ^u
+; Return
 
-SendCtrlI:
-Send, ^i
-Return
+; SendCtrlI:
+; Send, ^i
+; Return
 
-SendCtrlO:
-Send, ^o
-Return
+; SendCtrlO:
+; Send, ^o
+; Return
 
-SendCtrlP:
-Send, ^p
-Return
+; SendCtrlP:
+; Send, ^p
+; Return
 
-SendCtrlA:
-Send, ^a
-Return
+; SendCtrlA:
+; Send, ^a
+; Return
 
-SendCtrlS:
-Send, ^s
-Return
+; SendCtrlS:
+; Send, ^s
+; Return
 
-SendCtrlD:
-Send, ^d
-Return
+; SendCtrlD:
+; Send, ^d
+; Return
 
-SendCtrlF:
-Send, ^f
-Return
+; SendCtrlF:
+; Send, ^f
+; Return
 
-SendCtrlG:
-Send, ^g
-Return
+; SendCtrlG:
+; Send, ^g
+; Return
 
-SendCtrlH:
-Send, ^h
-Return
+; SendCtrlH:
+; Send, ^h
+; Return
 
-SendCtrlJ:
-Send, ^j
-Return
+; SendCtrlJ:
+; Send, ^j
+; Return
 
-SendCtrlK:
-Send, ^k
-Return
+; SendCtrlK:
+; Send, ^k
+; Return
 
-SendCtrlL:
-Send, ^l
-Return
+; SendCtrlL:
+; Send, ^l
+; Return
 
-SendCtrlZ:
-Send, ^z
-Return
+; SendCtrlZ:
+; Send, ^z
+; Return
 
-SendCtrlX:
-Send, ^x
-Return
+; SendCtrlX:
+; Send, ^x
+; Return
 
-SendCtrlC:
-Send, ^c
-Return
+; SendCtrlC:
+; Send, ^c
+; Return
 
-SendCtrlV:
-Send, ^v
-Return
+; SendCtrlV:
+; Send, ^v
+; Return
 
-SendCtrlB:
-Send, ^b
-Return
+; SendCtrlB:
+; Send, ^b
+; Return
 
-SendCtrlN:
-Send, ^n
-Return
+; SendCtrlN:
+; Send, ^n
+; Return
 
-SendCtrlM:
-Send, ^m
-Return
+; SendCtrlM:
+; Send, ^m
+; Return
 
 
-; Remap ctrl+shift
-SendCtrlShiftQ:
-Send, ^+q
-Return
+; ; Remap ctrl+shift
+; SendCtrlShiftQ:
+; Send, ^+q
+; Return
 
-SendCtrlShiftW:
-Send, ^+w
-Return
+; SendCtrlShiftW:
+; Send, ^+w
+; Return
 
-SendCtrlShiftE:
-Send, ^+e
-Return
+; SendCtrlShiftE:
+; Send, ^+e
+; Return
 
-SendCtrlShiftR:
-Send, ^+r
-Return
+; SendCtrlShiftR:
+; Send, ^+r
+; Return
 
-SendCtrlShiftT:
-Send, ^+t
-Return
+; SendCtrlShiftT:
+; Send, ^+t
+; Return
 
-SendCtrlShiftY:
-Send, ^+y
-Return
+; SendCtrlShiftY:
+; Send, ^+y
+; Return
 
-SendCtrlShiftU:
-Send, ^+u
-Return
+; SendCtrlShiftU:
+; Send, ^+u
+; Return
 
-SendCtrlShiftI:
-Send, ^+i
-Return
+; SendCtrlShiftI:
+; Send, ^+i
+; Return
 
-SendCtrlShiftO:
-Send, ^+o
-Return
+; SendCtrlShiftO:
+; Send, ^+o
+; Return
 
-SendCtrlShiftP:
-Send, ^+p
-Return
+; SendCtrlShiftP:
+; Send, ^+p
+; Return
 
-SendCtrlShiftA:
-Send, ^+a
-Return
+; SendCtrlShiftA:
+; Send, ^+a
+; Return
 
-SendCtrlShiftS:
-Send, ^+s
-Return
+; SendCtrlShiftS:
+; Send, ^+s
+; Return
 
-SendCtrlShiftD:
-Send, ^+d
-Return
+; SendCtrlShiftD:
+; Send, ^+d
+; Return
 
-SendCtrlShiftF:
-Send, ^+f
-Return
+; SendCtrlShiftF:
+; Send, ^+f
+; Return
 
-SendCtrlShiftG:
-Send, ^+g
-Return
+; SendCtrlShiftG:
+; Send, ^+g
+; Return
 
-SendCtrlShiftH:
-Send, ^+h
-Return
+; SendCtrlShiftH:
+; Send, ^+h
+; Return
 
-SendCtrlShiftJ:
-Send, ^+j
-Return
+; SendCtrlShiftJ:
+; Send, ^+j
+; Return
 
-SendCtrlShiftK:
-Send, ^+k
-Return
+; SendCtrlShiftK:
+; Send, ^+k
+; Return
 
-SendCtrlShiftL:
-Send, ^+l
-Return
+; SendCtrlShiftL:
+; Send, ^+l
+; Return
 
-SendCtrlShiftZ:
-Send, ^+z
-Return
+; SendCtrlShiftZ:
+; Send, ^+z
+; Return
 
-SendCtrlShiftX:
-Send, ^+x
-Return
+; SendCtrlShiftX:
+; Send, ^+x
+; Return
 
-SendCtrlShiftC:
-Send, ^+c
-Return
+; SendCtrlShiftC:
+; Send, ^+c
+; Return
 
-SendCtrlShiftV:
-Send, ^+v
-Return
+; SendCtrlShiftV:
+; Send, ^+v
+; Return
 
-SendCtrlShiftB:
-Send, ^+b
-Return
+; SendCtrlShiftB:
+; Send, ^+b
+; Return
 
-SendCtrlShiftN:
-Send, ^+n
-Return
+; SendCtrlShiftN:
+; Send, ^+n
+; Return
 
-SendCtrlShiftM:
-Send, ^+m
-Return
+; SendCtrlShiftM:
+; Send, ^+m
+; Return
 
 
 
 ;--------------------------------------------------------------
-
+\::,
 
