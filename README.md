@@ -1,9 +1,12 @@
 # ⌨️Key remapper for better typing experience
-except for pressing ctrl, shift, alt, and win key combos, you don't have to use any other key row than the three main key rows, i.e. the alphabet rows.
+except for pressing ctrl, shift, alt, and win key combos, you don't have to use any key row other than the three main key rows, i.e. the alphabet rows.
 This is aimed to reduce the hand movement and improve touch typing experience by placing all the special symbols on the alphabet rows itself.
 ## 🟩installation (Windows only currently)
 1. 💾install AHK form ahk website
 2. 📥download all the files and then run them in order > FROM TOP TO BOTTOM
+- run by double clicking the files
+    1. first > , . caps.ahk
+    2. then > num_pad_handling.ahk
 
 now you are good to go!!
 
